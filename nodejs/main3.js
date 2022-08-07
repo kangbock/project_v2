@@ -38,6 +38,12 @@ connection.changeUser({
 app.set('view engine', 'ejs');
 //app.engine('html',require('ejs').renderFile);
 
+//app.use('view engine','ejs');
+
+        var ID = '';
+        var Title = '';
+        var Content = '';
+        var Time = '';
 
 app.get('/main3.js', function (req, res, next) {
 //    res.render('main3.js')  
@@ -45,21 +51,19 @@ app.get('/main3.js', function (req, res, next) {
 	connection.query('select * from board;', function (err, rows, fields) {
         if (!err) {
             for(let i=0; i <rows.length; ++i)
-            {              
+            {     
+		
                 var board_id = rows[i]['board_id'];
-                var title = rows[i]['title'];
+		var title = rows[i]['title'];
                 var content = rows[i]['content'];
                 var time = rows[i]['time'];
 
-                output += '<tr><td>' + board_id + '</td>' +
-			    '<td>' + title + '</td>' +
-			    '<td>' + content + '</td>' +
-			    '<td>' + time + '</td></tr>';
+		output += board_id + title + content + time;
 	    }
-		//console.log(output);
-		res.send(output);
 		
-            	res.render('board.html', {'output': output}, function(err, html){
+            	res.render('board.html',
+			{'output': output},
+			function(err, html){
 			if (err){
 				console.log(err)
 			}
@@ -71,7 +75,7 @@ app.get('/main3.js', function (req, res, next) {
                 res.setHeader("Location","http://13.125.125.45/404.html");
                 res.end();
             }
-    }); return (output);
+    });return(output);
 	connection.end();
 }).listen(3000);
 
