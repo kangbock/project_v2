@@ -58,14 +58,14 @@ app.get('/main3.js', function (req, res, next) {
 	    }
 		//console.log(output);
 		res.send(output);
-		/*
+		
             	res.render('board.html', {'output': output}, function(err, html){
 			if (err){
 				console.log(err)
 			}
 			res.end(html)
 		});
-		*/
+		
             }else{
                 res.statusCode=302
                 res.setHeader("Location","http://13.125.125.45/404.html");
