@@ -6,7 +6,7 @@ COPY    main.html /usr/share/nginx/html/
 COPY    table.css /usr/share/nginx/html/
 COPY    temp /usr/share/nginx/html/
 
-RUN	cp -r /usr/share/nginx/html/temp/* /usr/share/nginx/html/
+RUN	cp -r /usr/share/nginx/html/temp/ /usr/share/nginx/html/
 RUN	rm -rf /usr/share/nginx/html/temp
 
 EXPOSE  80
