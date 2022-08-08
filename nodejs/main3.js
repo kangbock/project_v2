@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
+var main_board = 'SELECT member.id, member.email, member.full_name, member.department_name, board.board_id, board.member_id, board.title, board.content, board.time FROM member, board WHERE member.id = board.member_id;';
+
 const config = {
 	host    : "10.0.0.12",
         user    : "root",
@@ -48,7 +50,7 @@ app.set('view engine', 'ejs');
 app.get('/main3.js', function (req, res, next) {
 //    res.render('main3.js')  
 	var rows = '';
-	connection.query('select * from board;', function (err, rows) {
+	connection.query(main_board, function (err, rows) {
         if (!err) {
         /*    for(let i=0; i <rows.length; ++i)
             {     
