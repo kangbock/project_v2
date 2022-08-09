@@ -19,16 +19,16 @@
         <body id="page-top">
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="http://www.kb97.xyz/assets/img/logo.png" alt="..." /></a>
+                <a class="navbar-brand" href="/main.html"><img src="http://www.kb97.xyz/assets/img/logo.png" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Portfolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+			<li class="nav-item"><a class="nav-link" href="/main.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board.html.js">Notice</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/organization.html">organization</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="main.html">Company</a></li>
@@ -38,12 +38,12 @@
         </nav>
 <section class="page-section" id="">
 <section class="notice">
-	<div id="board-list">
+<div id="board-list">
   <div class="page-title">
         <div class="container">
 		<div class="text-center">
-            <h3 class="section-heading text-uppercase">공지사항</h3>
-	    <h3 class="section-subheading text-muted"></h3>
+       		    <h3 class="section-heading text-uppercase">공지사항</h3>
+		    <h3 class="section-subheading text-muted"></h3>
 		</div>
         </div>
     </div>
@@ -56,12 +56,13 @@
                     <div class="search-wrap">
                         <label for="search" class="blind">공지사항 내용 검색</label>
                         <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
-                        <button type="submit" class="btn btn-dark" form="board">검색</button>
+                        <button type="submit" class="btn btn-dark">검색</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
    
   <!-- board list area -->
     <div id="board-list">
@@ -76,31 +77,16 @@
                 </tr>
                 </thead>
                 <tbody>
-			<form id="board" method='get' action="main3.js">
-				<!--
-			<tr>
-				<td>1</td><th><a herf="#!">공지</a></th><td>이강복</td><td>2022/08/06</td>
-			</tr>
-			<tr>
-                                <td>1</td><th><a herf="#!">공지</a></th><td>이강복</td><td>2022/08/06</td>
-                        </tr>
-			<tr>
-                                <td>1</td><th><a herf="#!">공지</a></th><td>이강복</td><td>2022/08/06</td>
-                        </tr>
-				-->
 			<!--- 요기 변수 --->
-
 			<% for(var i=0; i<rows.length; i++) { var data = rows[i];  %>
 				<tr><td><%=data.board_id%></td> 
 				<th><a href="/board/read/<%=data.board_id%>"><%=data.title%></a></th>
 				<td><%=data.full_name%></td>
-				<td><%=data.time%></td></tr>
+				<td><%=data.time %></td></tr>
 			<% } %>
-
-
-			<form>
 		</tbody>
             </table>
+	    <button type="submit" class="btn btn-dark" style="width:90pt;height:30pt;float:right;" onclick="location.href='/write.html.js'">글 작성</button>
         </div>
     </div>
 </section>

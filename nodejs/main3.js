@@ -1,13 +1,12 @@
 var mysql = require('mysql');
-var http = require('http');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-var main_board = 'SELECT member.id, member.email, member.full_name, member.department_name, board.board_id, board.member_id, board.title, board.content, board.time FROM member, board WHERE member.id = board.member_id;';
+var main_board = "SELECT * FROM member, board WHERE member.id = board.member_id ORDER BY board.board_id;";
 
 const config = {
-	host    : "10.0.0.12",
+	host    : "db1.cac4pv4f8grd.ap-northeast-2.rds.amazonaws.com",
         user    : "root",
         password: "It12345!",
         port    : 3306
@@ -33,22 +32,11 @@ connection.changeUser({
     // Do another query
 });
 
-//app.get('', (req, res) => {
-//	res.sendFile(__dirname + '/main.html')
-//})
 
 app.set('view engine', 'ejs');
-//app.engine('html',require('ejs').renderFile);
 
-//app.use('view engine','ejs');
-
-        var ID = '';
-        var Title = '';
-        var Content = '';
-        var Time = '';
 
 app.get('/board.html.js', function (req, res, next) {
-//    res.render('main3.js')  
 	var rows = '';
 	connection.query(main_board, function (err, rows) {
         if (!err) {
@@ -69,11 +57,20 @@ app.get('/board.html.js', function (req, res, next) {
             }
     });	return(rows);
 	connection.end();
-}).listen(3000);
-
- app.engine('html',require('ejs').renderFile);
-app.get('/board.html.js', function(req, res) {
-	res.render('board.html')
 });
+
+app.get('/write.html.js', function (req, res, next) {
+            res.render('write.html',
+                    function(err, html){
+                    if (err){
+                            console.log(err)
+                    }
+                    res.end(html)
+		    });
+});
+
+app.listen(3000);
+
+app.engine('html',require('ejs').renderFile);
 
 

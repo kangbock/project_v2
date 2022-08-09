@@ -11,6 +11,8 @@ COPY	main3.js /var/task/
 COPY	package.js /var/task/
 COPY	board.html /var/task/views
 COPY	login.js /var/task/
+COPY    write.html /var/task/views
+
 
 CMD [ "app.handler" ]
 
