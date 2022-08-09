@@ -47,20 +47,11 @@ app.set('view engine', 'ejs');
         var Content = '';
         var Time = '';
 
-app.get('/main3.js', function (req, res, next) {
+app.get('/board.html.js', function (req, res, next) {
 //    res.render('main3.js')  
 	var rows = '';
 	connection.query(main_board, function (err, rows) {
         if (!err) {
-        /*    for(let i=0; i <rows.length; ++i)
-            {     
-		
-                var board_id = rows[i]['board_id'];
-		var title = rows[i]['title'];
-                var content = rows[i]['content'];
-                var time = rows[i]['time'];
-
-	    }*/
 		
             	res.render('board.html',
 			{rows: rows },
@@ -73,7 +64,7 @@ app.get('/main3.js', function (req, res, next) {
 		
             }else{
                 res.statusCode=302
-                res.setHeader("Location","http://13.125.125.45/404.html");
+                res.setHeader("Location","http://www.kb97.xyz/404.html");
                 res.end();
             }
     });	return(rows);
