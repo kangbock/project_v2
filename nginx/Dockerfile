@@ -2,6 +2,8 @@ FROM    nginx
 
 COPY    default.conf /etc/nginx/conf.d/
 COPY    login.html /usr/share/nginx/html/
+COPY    logout.html /usr/share/nginx/html/
+COPY    organization.html /usr/share/nginx/html/
 COPY    main.html /usr/share/nginx/html/
 COPY    table.css /usr/share/nginx/html/
 COPY    board.css /usr/share/nginx/html/
