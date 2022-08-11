@@ -53,36 +53,63 @@ app.set('view engine', 'ejs');
 
 app.get('/board.html.js', function (req, res, next) {
 	var rows = '';
+	if (req.session.logined) {
 	connection.query(main_board, function (err, rows) {
-        if (!err) {
-		
-            	res.render('board.html',
-			{rows: rows },
-			function(err, html){
-			if (err){
-				console.log(err)
-			}
-			res.end(html)
-		});
-		
-            }else{
-                res.statusCode=302
-                res.setHeader("Location","http://www.kb97.xyz/404.html");
-                res.end();
-            }
-    });	return(rows);
+	        if (!err) {
+	            	res.render('board.html',
+				{rows: rows },
+				function(err, html){
+				if (err){
+					console.log(err)
+				}
+				res.end(html)
+			});
+			
+	            }else{
+	                res.statusCode=302
+	                res.setHeader("Location","http://www.kb97.xyz/404.html");
+	                res.end();
+	            }
+	})
+    };	return(rows);
 	connection.end();
 });
 
 app.get('/write.html.js', function (req, res, next) {
-            res.render('write.html',
+	connection.query('select * from member where email="'+req.session.user_id+'";', function(err,rows,fields){
+	console.log(rows[0]["full_name"])	
+        res.render('write.html',
+		    {rows: rows[0]["full_name"]},
                     function(err, html){
                     if (err){
                             console.log(err)
                     }
                     res.end(html)
 		    });
+	})
 });
+
+app.get('/main.html.js', function (req, res, next) {
+            res.render('main.html',
+                    function(err, html){
+                    if (err){
+                            console.log(err)
+                    }
+                    res.end(html)
+                    });
+});
+
+app.get('/organization.html.js', function (req, res, next) {
+            res.render('organization.html',
+                    function(err, html){
+                    if (err){
+                            console.log(err)
+                    }
+                    res.end(html)
+                    });
+});
+
+
 
 
 app.get('/login.html.js',function(req,res){
@@ -130,7 +157,7 @@ app.post('/login.js',function(req,res){
             
                 req.session.logined= true;
                 req.session.user_id=req.body.id;
-                res.render('http://www.kb97.xyz/main.html',{data});
+                res.render('main.html',{data});
             }
                 // 다르면 로그인 실패, 에러를 출력하고 다시 로그인 페이지로
             else
@@ -144,8 +171,9 @@ app.post('/login.js',function(req,res){
     //logout controller
 app.get('/logout.html.js',function(req,res){
     req.session.destroy();
-    res.redirect('/');
+    res.redirect('http://www.kb97.xyz');
 });
+
 
     // register controller
 app.post('/register.js',function(req,res){
@@ -153,22 +181,25 @@ app.post('/register.js',function(req,res){
     var data = req.body;
         // 아이디 중복 검사
         // DB에 쿼리문을 날려 err,rows,fields값을 받아오는 콜백함수를 사용한다.
-    connection.query('SELECT * from member where id=?',data.id,function(err,rows,fields){
+    connection.query('SELECT * from member where id="'+data.id+'";',function(err,rows,fields){
         if(err) {
+            // 쿼리 에러
             console.log('Error: '+err);
             throw err;
         }
         if (rows.length<=0){
             // 중복되는 아이디가 없다. 회원가입 성공. DB에 레코드를 추가한다.
-            var params= [data.id,'email','sung',data.password,'010','D&K'];
-            console.log(" datas : " + data.id +"  , "+data.password);
+            var params= [null,data.email,data.full_name,data.password,data.phone_number,data.department_name];
+            console.log(" datas : " + data.email +"  , "+data.department_name);
             connection.query('insert into member values(?,?,?,?,?,?)',params,function(err,results){
                 if(err){
+                    //쿼리 에러
                     console.log('Error insert query : '+err);
                     throw err;
-                }else{
-                    // 성공 창을 띄우고 이전 회원가입 페이지로 돌아간다
-                    res.send("<script>alert('success'); location.href='http://localhost:3000/register.html';</script> ");
+                }
+                else{
+                     // insert 쿼리 성공: 성공 창을 띄우고 이전 로그인 페이지로 돌아간다
+                     res.send("<script>alert('success'); location.href='http://www.kb97.xyz/login.html';</script> ");
                 }
             });
         }else{
@@ -177,7 +208,7 @@ app.post('/register.js',function(req,res){
                 // + 비밀번호 유효성
                 // + 이메일 유효성
                 // + 전화번호 유효성 검사
-            res.render(__dirname+'/views/register.ejs',{data})
+                res.send("<script>alert('중복된 아이디입니다.'); location.href='http://www.kb97.xyzx/register.html';</script> ");
         }
     })
 });

@@ -25,16 +25,16 @@
         <body id="page-top">
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="/main.html"><img src="http://www.kb97.xyz/assets/img/logo.png" alt="..." /></a>
+                <a class="navbar-brand" href="/main.html.js"><img src="http://www.kb97.xyz/assets/img/logo.png" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-			<li class="nav-item"><a class="nav-link" href="/main.html">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="/main.html.js">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="/board.html.js">Notice</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/organization.html">Organization</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/organization.html.js">Organization</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="/logout.html.js">Logout</a></li>
@@ -63,7 +63,8 @@
 		      </div>
 		      <div class="mb-3"> 
 			      <label for="member_id">작성자</label> 
-			      <input type="text" class="form-control" name="member_id" id="member_id" placeholder="이 강 복" disabled>   
+			      <% var rows=rows; %>
+			      <input type="text" class="form-control" name="member_id" id="member_id" placeholder=<%= rows %> disabled>   
 		      </div>     
 		      <div class="mb-3">    
 			      <label for="content">내용</label>      

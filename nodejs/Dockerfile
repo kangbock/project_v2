@@ -9,8 +9,9 @@ RUN	mkdir /var/task/views
 COPY	main3.js /var/task/
 COPY	package.js /var/task/
 COPY	board.html /var/task/views
+COPY    main.html /var/task/views
 COPY    write.html /var/task/views
-
+COPY    organization.html /var/task/views
 
 CMD [ "app.handler" ]
 
