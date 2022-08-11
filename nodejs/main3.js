@@ -5,6 +5,9 @@ const port = process.env.PORT || 3000;
 var session= require('express-session');
 var fileStore= require('session-file-store')(session);
 
+app.use(express.urlencoded({extended : true}));
+app.use(express.json());
+
 app.use(express.static('static')); 
 app.use(session({
     secret: 'sung',
@@ -84,13 +87,13 @@ app.get('/write.html.js', function (req, res, next) {
 
 app.get('/login.html.js',function(req,res){
     if(req.session.logined){
-        res.render(__dirname+'/views/logout.html',{id: req.session.user_id});
+        res.render('http://www.kb97.xyz/logout.html',{id: req.session.user_id});
     }else 
-    res.render(__dirname+'/views/login.html')
+    res.render('http://www.kb97.xyz/login.html')
 });
     // register view
 app.get('/register.html',function(req,res){
-    res.render(__dirname+'/views/register.html')
+    res.render('http://www.kb97.xyz/register.html')
 });
 
 
@@ -107,8 +110,7 @@ app.post('/login.js',function(req,res){
         //res.send(data.id+" "+data.password)
 
         // DB로 query해서 레코드가 있는지 확인한다
-    var output='';
-    connection.query('select id,password from member where id="'+data.id+'";', function(err,rows,fields){
+    connection.query('select * from member where email="'+data.id+'";', function(err,rows,fields){
         console.log('queried');
         if (err) { 
             //1. 쿼리에 실패하면 -> 에러페이지
@@ -122,17 +124,18 @@ app.post('/login.js',function(req,res){
         }else   
         {   //3. 레코드가 있으면 ->
                 // 비밀번호와 아이디 확인
-            if( rows[0]['id']==data.id && rows[0]['password']==data.password)
+		console.log(rows[0]['password']);
+            if( rows[0]['email']==data.id && rows[0]['password']==data.password)
             {   //같으면 로그인 성공 페이지== 로그인 세션을 가진 메인페이지
             
                 req.session.logined= true;
                 req.session.user_id=req.body.id;
-                res.render(__dirname+'/views/login.ejs',{data});
+                res.render('http://www.kb97.xyz/main.html',{data});
             }
                 // 다르면 로그인 실패, 에러를 출력하고 다시 로그인 페이지로
             else
             {
-                res.send("<script>alert('비밀번호가 일치하지 않습니다.'); location.href='/login.html';</script>") 
+                res.send("<script>alert('아이디 또는 비밀번호가 일치하지 않습니다.'); location.href='/login.html';</script>") 
             }
         }
     }); return (0);
