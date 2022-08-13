@@ -214,6 +214,33 @@ app.post('/register.js',function(req,res){
 });
 
 
+    // 글쓰기 페이지에서 글 등록 controller
+
+app.post('/write.js',function(req,res){
+    // 글 등록 페이지에서 POST로 넘어온 데이터= req.body
+    var member_id;
+    // DB에 글쓰기
+    //Session사용자의 member 레코드에서 member_no 값 query
+    connection.query("SELECT board.member_id from member, board WHERE member.id = board.member_id AND email='"+req.session.user_id+"';",function(err,rows,fields){
+        if(err)
+            throw err;
+        else{
+            member_id=rows[0]['member_id'];
+            console.log('member_id : '+member_id);
+            connection.query("INSERT INTO board values('',"+member_id+",'"+req.body.title+"','"+req.body.content+"',NOW())",function(err,result,fields){
+                // if query 실패 => 에러페이지
+                if(err){
+                    console.log("Error : " + err);
+                    throw err;
+                }
+                else {// if insert query 성공 => board.html로 다시
+                    res.redirect('http://www.kb97.xyz:3000/board.html.js')
+                };
+            });
+        }
+    });
+});
+
 
 app.listen(3000);
 
