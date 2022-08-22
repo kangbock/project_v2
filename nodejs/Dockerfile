@@ -1,6 +1,5 @@
 FROM amazon/aws-lambda-nodejs
 
-RUN	yum update 
 RUN	npm install -y mysql express http
 RUN	npm install --save express
 RUN	npm install -y ejs express-session session-file-store
