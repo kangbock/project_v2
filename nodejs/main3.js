@@ -234,7 +234,7 @@ app.post('/write.js',function(req,res){
                     throw err;
                 }
                 else {// if insert query 성공 => board.html로 다시
-                    res.redirect('http://node.kb97.xyz/board.html.js')
+                    res.redirect('http://node.kb97.xyz:3000/board.html.js')
                 };
             });
         }
