@@ -21,7 +21,7 @@ var main_board = "SELECT * FROM member, board WHERE member.id = board.member_id 
 var board_write = "";
 
 const config = {
-	host    : "db1.cac4pv4f8grd.ap-northeast-2.rds.amazonaws.com",
+	host    : "mydb.czgwhg0kozpu.ap-northeast-2.rds.amazonaws.com",
         user    : "root",
         password: "It12345!",
         port    : 3306
