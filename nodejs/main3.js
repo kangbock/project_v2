@@ -221,11 +221,11 @@ app.post('/write.js',function(req,res){
     var member_id;
     // DB에 글쓰기
     //Session사용자의 member 레코드에서 member_no 값 query
-    connection.query("SELECT board.member_id from member, board WHERE member.id = board.member_id AND email='"+req.session.user_id+"';",function(err,rows,fields){
+    connection.query("SELECT id from member where email='"+req.session.user_id+"';",function(err,rows,fields){
         if(err)
             throw err;
         else{
-            member_id=rows[0]['member_id'];
+            member_id=rows[0]['id'];
             console.log('member_id : '+member_id);
             connection.query("INSERT INTO board values('',"+member_id+",'"+req.body.title+"','"+req.body.content+"',NOW())",function(err,result,fields){
                 // if query 실패 => 에러페이지
