@@ -242,6 +242,11 @@ app.post('/write.js',function(req,res){
 });
 
 
+app.get('/health.html',function(req,res,err){
+	res.sendStatus(200);
+});
+
+
 app.listen(3000);
 
 app.engine('html',require('ejs').renderFile);
