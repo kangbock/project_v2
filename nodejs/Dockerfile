@@ -1,5 +1,6 @@
-FROM amazon/aws-lambda-nodejs
+FROM  node
 
+WORKDIR /var/task
 RUN	npm install -y mysql express http
 RUN	npm install --save express
 RUN	npm install -y ejs express-session session-file-store
@@ -12,6 +13,6 @@ COPY    main.html /var/task/views
 COPY    write.html /var/task/views
 COPY    organization.html /var/task/views
 
-CMD [ "app.handler" ]
+CMD [ "node", "main3.js" ]
 
 EXPOSE	3000
