@@ -38,4 +38,4 @@ mysql -uroot -pIt12345! -hmydb.czgwhg0kozpu.ap-northeast-2.rds.amazonaws.com << 
   UPDATE board SET board_id = @COUNT:=@COUNT+1;
 
   SELECT * FROM board, member WHERE member.id = board.member_id;
-  FOE
+FOE
