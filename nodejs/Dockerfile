@@ -1,5 +1,6 @@
 FROM  node
 
+RUN	mkdir /var/task
 WORKDIR /var/task
 RUN	npm install -y mysql express http
 RUN	npm install --save express
