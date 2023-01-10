@@ -1,8 +1,8 @@
 #! /bin/bash
 # mysql
-sudo yum install -y mysql
+sudo apt-get install -y mysql-client
 sudo export LANG="ko_KR.UTF-8"
-mysql -uroot -pIt12345! -hmydb.czgwhg0kozpu.ap-northeast-2.rds.amazonaws.com << FOE
+mysql -h prod-mysql-fs.mysql.database.azure.com -u admin1 -pIt12345! --ssl << FOE
   use project
   create table member (
 	  id int AUTO_INCREMENT NOT NULL primary key,
