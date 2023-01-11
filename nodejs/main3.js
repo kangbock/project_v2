@@ -21,8 +21,8 @@ var main_board = "SELECT * FROM member, board WHERE member.id = board.member_id 
 var board_write = "";
 
 const config = {
-	host    : "172.17.0.4",
-        user    : "root",
+	host    : "prod-mysql-fs.mysql.database.azure.com",
+        user    : "admin1",
         password: "It12345!",
         port    : 3306
 }
