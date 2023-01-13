@@ -67,7 +67,7 @@ app.get('/board.html.js', function (req, res, next) {
 			
 	            }else{
 	                res.statusCode=302
-	                res.setHeader("Location","http://20.249.92.238/404.html");
+	                res.setHeader("Location","http://www.kb97.xyz/404.html");
 	                res.end();
 	            }
 	})
@@ -114,13 +114,13 @@ app.get('/organization.html.js', function (req, res, next) {
 
 app.get('/login.html.js',function(req,res){
     if(req.session.logined){
-        res.render('http://20.249.92.238/logout.html',{id: req.session.user_id});
+        res.render('http://www.kb97.xyz/logout.html',{id: req.session.user_id});
     }else 
-    res.render('http://20.249.92.238/login.html')
+    res.render('http://www.kb97.xyz/login.html')
 });
     // register view
 app.get('/register.html',function(req,res){
-    res.render('http://20.249.92.238/register.html')
+    res.render('http://www.kb97.xyz/register.html')
 });
 
 
@@ -171,7 +171,7 @@ app.post('/login.js',function(req,res){
     //logout controller
 app.get('/logout.html.js',function(req,res){
     req.session.destroy();
-    res.redirect('http://20.249.92.238');
+    res.redirect('http://www.kb97.xyz');
 });
 
 
@@ -199,7 +199,7 @@ app.post('/register.js',function(req,res){
                 }
                 else{
                      // insert 쿼리 성공: 성공 창을 띄우고 이전 로그인 페이지로 돌아간다
-                     res.send("<script>alert('success'); location.href='http://20.249.92.238/login.html';</script> ");
+                     res.send("<script>alert('success'); location.href='http://www.kb97.xyz/login.html';</script> ");
                 }
             });
         }else{
@@ -208,7 +208,7 @@ app.post('/register.js',function(req,res){
                 // + 비밀번호 유효성
                 // + 이메일 유효성
                 // + 전화번호 유효성 검사
-                res.send("<script>alert('중복된 아이디입니다.'); location.href='http://20.249.92.238x/register.html';</script> ");
+                res.send("<script>alert('중복된 아이디입니다.'); location.href='http://www.kb97.xyzx/register.html';</script> ");
         }
     })
 });
@@ -234,7 +234,7 @@ app.post('/write.js',function(req,res){
                     throw err;
                 }
                 else {// if insert query 성공 => board.html로 다시
-                    res.redirect('http://20.249.92.238/board.html.js')
+                    res.redirect('http://www.kb97.xyz/board.html.js')
                 };
             });
         }

@@ -1,7 +1,7 @@
 #! /bin/bash
 # mysql
 sudo apt-get install -y mysql-client-core-5.7
-sudo export LANG="ko_KR.UTF-8"
+export LANG="ko_KR.UTF-8"
 mysql -h prod-mysql-fs.mysql.database.azure.com -u admin1 -pIt12345! << FOE
   create database project;
   use project;
