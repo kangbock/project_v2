@@ -23,8 +23,8 @@ mysql -h prod-mysql-fs.mysql.database.azure.com -u admin1 -pIt12345! << FOE
   	FOREIGN KEY (member_id) REFERENCES member(id)
   	);
 
-//  grant all privileges on project.* to 'root'@'%' IDENTIFIED BY 'It12345!';
-//  grant all privileges on project.* to 'root'@'mydb.czgwhg0kozpu.ap-northeast-2.rds.amazonaws.com' IDENTIFIED BY 'It12345!';
+#   grant all privileges on project.* to 'root'@'%' IDENTIFIED BY 'It12345!';
+#   grant all privileges on project.* to 'root'@'mydb.czgwhg0kozpu.ap-northeast-2.rds.amazonaws.com' IDENTIFIED BY 'It12345!';
   flush privileges;
 
   SHOW GRANTS FOR CURRENT_USER;
